@@ -4,18 +4,23 @@
 }
 .container{
     width:100vw;
+    display: flex;
 }
 .formDiv{
     /* border: 1px solid red; */
     margin: 0 auto;
-    width: 50vw;
+    width: 30%;
     display: block;
-    /* display: none; */ 
+    
 }
 
 .tableDiv{
     width:80vw;
     margin: 0 auto;
+    /* border: 1px solid red; */
+}
+
+.buttonDiv{
     /* border: 1px solid red; */
 }
 
