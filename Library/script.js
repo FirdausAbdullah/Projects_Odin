@@ -36,7 +36,22 @@ function updateBookOnTable(libraryArr){
     libraryArr.forEach(eachBook=>{
         const newTR = document.createElement("tr");
         for(let data in eachBook ){
-            if(data=="uuid"){continue;}
+            if(data=="uuid"){continue;}//later add data-uuid to newTR for removal id
+            else if(data=="isRead"){
+                const newTD = document.createElement("td");
+                const newReadButton = document.createElement("button");
+                const newRemoveButton = document.createElement("button");
+                
+                newReadButton.textContent = (eachBook[data]==true)?"Read":"Unread";
+                newReadButton.type = "button";
+                newRemoveButton.textContent = "Remove";
+                newRemoveButton.type = "button";
+                
+                newTD.appendChild(newReadButton);
+                newTD.appendChild(newRemoveButton);
+                newTR.appendChild(newTD);
+                continue;
+            }
             const newTD = document.createElement("td");
             newTD.textContent = eachBook[data];
             newTR.appendChild(newTD);
