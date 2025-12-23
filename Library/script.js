@@ -31,6 +31,17 @@ addBookToLibrary("Title Kills","Sara Keef",109,false);
 
 // ------------ Display -----------------
 const tableBody = document.querySelector("#tableBody");
+const addBookButton = document.querySelector("#addBookButton");
+const dialogPopup = document.querySelector("dialog");
+const closeDialogButton = document.querySelector("#closeDialog");
+
+addBookButton.addEventListener("click",()=>{
+    dialogPopup.showModal(); //tells <dialog> element to appear
+});
+
+closeDialogButton.addEventListener("click",()=>{
+    dialogPopup.close();
+});
 
 function updateBookOnTable(libraryArr){    
     libraryArr.forEach(eachBook=>{

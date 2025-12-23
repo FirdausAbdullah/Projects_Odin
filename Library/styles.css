@@ -16,6 +16,19 @@
     display: none;
 }
 
+/* backdrop is for modal element */
+::backdrop{
+    background-image: linear-gradient(
+        45deg,
+        magenta,
+        rebeccapurple,
+        dodgerblue,
+        green
+    );
+
+    opacity: 0.8;
+}   
+
 
 
 
