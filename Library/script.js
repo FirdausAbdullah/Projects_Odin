@@ -34,6 +34,8 @@ const tableBody = document.querySelector("#tableBody");
 const addBookButton = document.querySelector("#addBookButton");
 const dialogPopup = document.querySelector("dialog");
 const closeDialogButton = document.querySelector("#closeDialog");
+const bookSubmission = document.querySelector("#addBookForm");
+ 
 
 addBookButton.addEventListener("click",()=>{
     dialogPopup.showModal(); //tells <dialog> element to appear
@@ -43,7 +45,21 @@ closeDialogButton.addEventListener("click",()=>{
     dialogPopup.close();
 });
 
-function updateBookOnTable(libraryArr){    
+bookSubmission.addEventListener("submit", (event)=> {
+     // Prevent the form from submitting in the traditional way (which refreshes the page)
+
+const inputTitle = document.querySelector('input[name="bookTitle"]');
+const inputAuthor = document.querySelector('input[name="authorName"]');
+const inputPages = document.querySelector('input[name="noPages"]');
+const inputRead = document.querySelector('figcaption>input[name="isRead"]:checked');
+    event.preventDefault();
+    addBookToLibrary(inputTitle.value,inputAuthor.value,inputPages.value,inputRead.value);
+    dialogPopup.close();  //close the popup after a successful submission
+    updateBookOnTable(myLibrary);
+});
+
+function updateBookOnTable(libraryArr){   
+    tableBody.replaceChildren(); 
     libraryArr.forEach(eachBook=>{
         const newTR = document.createElement("tr");
         for(let data in eachBook ){

@@ -16,6 +16,9 @@
     display: none;
 }
 
+dialog{
+    margin: auto auto;
+}
 /* backdrop is for modal element */
 ::backdrop{
     background-image: linear-gradient(
