@@ -76,10 +76,20 @@ function updateBookOnTable(libraryArr){
                 const newReadButton = document.createElement("button");
                 const newRemoveButton = document.createElement("button");
                 
-                newReadButton.textContent = (eachBook[data]==true)?"Read":"Unread";
+                newReadButton.textContent= (eachBook[data]==true)?"Read":"Unread";
                 newReadButton.type = "button";
                 newRemoveButton.textContent = "Remove";
                 newRemoveButton.type = "button";
+
+                // newReadButton.addEventListener("click",(e)=>{
+                //     newReadButton.textContent = (newReadButton.textContent=="Read")? "Unread":"Read";
+                //     updateReadStatus(newTR.dataset.uuid,eachBook[data]);
+                // });
+
+                newRemoveButton.addEventListener("click",(e)=>{
+                    removeBookFromLibrary(newTR.dataset.uuid);
+                    newTR.remove();
+                });
                 
                 newTD.appendChild(newReadButton);
                 newTD.appendChild(newRemoveButton);
@@ -94,9 +104,20 @@ function updateBookOnTable(libraryArr){
         
     });
 }
-// function displayBook(libraryArr){
-//     libraryArr.forEach(eachBook => {
-//         console.dir(eachBook);
-//     });
+
+// function updateReadStatus(uuid,readStatus){
+//     console.log(uuid + readStatus);
+//     const indexPosition = myLibrary.findIndex(book => book.uuid == uuid);
+//     myLibrary[indexPosition].isRead = !readStatus;
+//     console.dir(myLibrary);
 // }
+
+function removeBookFromLibrary(uuid){
+    const indexPosition = myLibrary.findIndex(book => book.uuid == uuid);
+    if (indexPosition > -1){
+        myLibrary.splice(indexPosition,1);
+    }
+
+}
+
 updateBookOnTable(myLibrary);
