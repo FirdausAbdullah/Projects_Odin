@@ -54,16 +54,23 @@ const inputPages = document.querySelector('input[name="noPages"]');
 const inputRead = document.querySelector('figcaption>input[name="isRead"]:checked');
     event.preventDefault();
     addBookToLibrary(inputTitle.value,inputAuthor.value,inputPages.value,inputRead.value);
+    bookSubmission.reset();
     dialogPopup.close();  //close the popup after a successful submission
     updateBookOnTable(myLibrary);
 });
+
+
 
 function updateBookOnTable(libraryArr){   
     tableBody.replaceChildren(); 
     libraryArr.forEach(eachBook=>{
         const newTR = document.createElement("tr");
         for(let data in eachBook ){
-            if(data=="uuid"){continue;}//later add data-uuid to newTR for removal id
+            if(data=="uuid"){
+                newTR.dataset.uuid = eachBook[data];
+                continue;
+            } //add data-uuid attribute
+
             else if(data=="isRead"){
                 const newTD = document.createElement("td");
                 const newReadButton = document.createElement("button");
