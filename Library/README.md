@@ -1,5 +1,5 @@
-# Projects_Odin
-Projects and mini projects from Odin Web Development courses
+# Library Mini Project
+Mini projects from Odin Web Development courses
 
 This project is a library book inventory app. User will enter a new book and it will be displayed on the table. 
 
