@@ -21,10 +21,10 @@ function addBookToLibrary(title,author,pages,isRead){
 
 
 addBookToLibrary("CSI:Miami","John X",333,true);
-addBookToLibrary("Spy Craft","Mel Grissom",27,true);
-addBookToLibrary("How Can I?","James Rain",731,false);
-addBookToLibrary("Invincible","Scott T. Helberg",90,true);
-addBookToLibrary("Title Kills","Sara Keef",109,false);
+// addBookToLibrary("Spy Craft","Mel Grissom",27,true);
+// addBookToLibrary("How Can I?","James Rain",731,false);
+// addBookToLibrary("Invincible","Scott T. Helberg",90,true);
+// addBookToLibrary("Title Kills","Sara Keef",109,false);
 
 
 
@@ -76,7 +76,13 @@ function updateBookOnTable(libraryArr){
                 const newReadButton = document.createElement("button");
                 const newRemoveButton = document.createElement("button");
                 
-                newReadButton.textContent= (eachBook[data]==true)?"Read":"Unread";
+                // newReadButton.textContent= (eachBook[data]==true)?"Read":"Unread";
+                if(eachBook[data] == true || eachBook[data] == "true"){
+                    newReadButton.textContent = "Read";
+                }
+                else{
+                    newReadButton.textContent = "Unread";
+                }
                 newReadButton.type = "button";
                 newRemoveButton.textContent = "Remove";
                 newRemoveButton.type = "button";
