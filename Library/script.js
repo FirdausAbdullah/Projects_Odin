@@ -15,18 +15,10 @@ const myLibrary = [];
 
 function addBookToLibrary(title,author,pages,isRead){
     const uuid = crypto.randomUUID();
+    isRead = (isRead == "true")? true:false;
     const createdBook = new Book(uuid,title,author,pages,isRead);
     myLibrary.push(createdBook);
 }
-
-
-addBookToLibrary("CSI:Miami","John X",333,true);
-// addBookToLibrary("Spy Craft","Mel Grissom",27,true);
-// addBookToLibrary("How Can I?","James Rain",731,false);
-// addBookToLibrary("Invincible","Scott T. Helberg",90,true);
-// addBookToLibrary("Title Kills","Sara Keef",109,false);
-
-
 
 
 // ------------ Display -----------------
@@ -46,13 +38,13 @@ closeDialogButton.addEventListener("click",()=>{
 });
 
 bookSubmission.addEventListener("submit", (event)=> {
-     // Prevent the form from submitting in the traditional way (which refreshes the page)
+     
 
-const inputTitle = document.querySelector('input[name="bookTitle"]');
-const inputAuthor = document.querySelector('input[name="authorName"]');
-const inputPages = document.querySelector('input[name="noPages"]');
-const inputRead = document.querySelector('figcaption>input[name="isRead"]:checked');
-    event.preventDefault();
+    const inputTitle = document.querySelector('input[name="bookTitle"]');
+    const inputAuthor = document.querySelector('input[name="authorName"]');
+    const inputPages = document.querySelector('input[name="noPages"]');
+    const inputRead = document.querySelector('figcaption>input[name="isRead"]:checked');
+    event.preventDefault(); // Prevent the form from submitting in the traditional way (which refreshes the page)
     addBookToLibrary(inputTitle.value,inputAuthor.value,inputPages.value,inputRead.value);
     bookSubmission.reset();
     dialogPopup.close();  //close the popup after a successful submission
@@ -76,21 +68,29 @@ function updateBookOnTable(libraryArr){
                 const newReadButton = document.createElement("button");
                 const newRemoveButton = document.createElement("button");
                 
-                // newReadButton.textContent= (eachBook[data]==true)?"Read":"Unread";
-                if(eachBook[data] == true || eachBook[data] == "true"){
+                if(eachBook[data] == true){
                     newReadButton.textContent = "Read";
+                    newReadButton.style.backgroundColor = "green";
                 }
                 else{
                     newReadButton.textContent = "Unread";
+                    newReadButton.style.backgroundColor = "red";
                 }
                 newReadButton.type = "button";
                 newRemoveButton.textContent = "Remove";
                 newRemoveButton.type = "button";
 
-                // newReadButton.addEventListener("click",(e)=>{
-                //     newReadButton.textContent = (newReadButton.textContent=="Read")? "Unread":"Read";
-                //     updateReadStatus(newTR.dataset.uuid,eachBook[data]);
-                // });
+                newReadButton.addEventListener("click",(e)=>{
+                    const readStatus = (newReadButton.textContent=="Read")? "Unread":"Read";;
+                    newReadButton.textContent = readStatus;
+                    if(readStatus=="Read"){
+                        newReadButton.style.backgroundColor = "green";
+                    }
+                    else{
+                        newReadButton.style.backgroundColor = "red";
+                    }
+                    updateReadStatus(newTR.dataset.uuid,readStatus);
+                });
 
                 newRemoveButton.addEventListener("click",(e)=>{
                     removeBookFromLibrary(newTR.dataset.uuid);
@@ -111,12 +111,12 @@ function updateBookOnTable(libraryArr){
     });
 }
 
-// function updateReadStatus(uuid,readStatus){
-//     console.log(uuid + readStatus);
-//     const indexPosition = myLibrary.findIndex(book => book.uuid == uuid);
-//     myLibrary[indexPosition].isRead = !readStatus;
-//     console.dir(myLibrary);
-// }
+function updateReadStatus(uuid,readStatus){
+    // console.log(uuid + readStatus);
+    const indexPosition = myLibrary.findIndex(book => book.uuid == uuid);
+    myLibrary[indexPosition].isRead = (readStatus == "Read")? true:false;
+    console.dir(myLibrary);
+}
 
 function removeBookFromLibrary(uuid){
     const indexPosition = myLibrary.findIndex(book => book.uuid == uuid);
@@ -126,4 +126,3 @@ function removeBookFromLibrary(uuid){
 
 }
 
-updateBookOnTable(myLibrary);
