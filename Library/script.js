@@ -5,9 +5,6 @@ function Book(uuid,title,author,pages,isRead){
     this.isRead = isRead,
     this.uuid = uuid
 
-    // this.info = function() {
-    //     return `${this.title} by ${this.author}, ${this.pages} pages, ${(this.isRead)? "Read" : "Not Read"}` ;
-    // }
 };
 
 
@@ -112,10 +109,9 @@ function updateBookOnTable(libraryArr){
 }
 
 function updateReadStatus(uuid,readStatus){
-    // console.log(uuid + readStatus);
     const indexPosition = myLibrary.findIndex(book => book.uuid == uuid);
     myLibrary[indexPosition].isRead = (readStatus == "Read")? true:false;
-    console.dir(myLibrary);
+    
 }
 
 function removeBookFromLibrary(uuid){
